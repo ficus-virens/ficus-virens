@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="nav-border">
+  <button mat-icon-button (click)="onToggleSidenav()" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a [routerLink]="['/']" mat-button>
+    <h1>Vista's Blog</h1>
+  </a>
+  <div fxFlex fxLayout fxLayoutAlign="end">
+    <div fxHide.lt-md>
+      <a [routerLink]="['/posts']" mat-button>文章列表</a>
+      <a [routerLink]="['/category']" mat-button>分类</a>
+      <a [routerLink]="['/archive']" mat-button>归档</a>
+      <a [routerLink]="['/contact']" mat-button>关于我</a>
+    </div>
+  </div>
+</mat-toolbar>

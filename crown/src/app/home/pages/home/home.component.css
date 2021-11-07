@@ -1,0 +1,24 @@
+.example-card {
+  max-width: 400px;
+}
+.post-card {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.post-backend-image {
+  height: 100px;
+}
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.tag-button-row .mat-button-base {
+  display: table-cell;
+  width: 490px;
+  margin: 8px 8px 8px 0;
+}
+
+.side-about-card {
+  width: 100px;
+  height: 50px;
+}
