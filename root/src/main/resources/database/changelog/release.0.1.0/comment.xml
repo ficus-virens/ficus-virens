@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <!--
+    comment.xml 博客评论相关的表：blog_comment
+    -->
+    <changeSet id="create-table-20211113-0002" author="vista yih">
+        <createTable tableName="blog_comment" remarks="comment table">
+            <column name="id" type="BIGINT" remarks="system option id" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_comment_id" />
+            </column>
+            <column name="user_id" type="BIGINT" remarks="blog comment owner id">
+                <constraints nullable="false" />
+            </column>
+            <column name="post_id" type="BIGINT" remarks="blog comment post id">
+                <constraints nullable="false" />
+            </column>
+            <column name="parent_id" type="BIGINT" remarks="blog comment parent id">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="INT(3)" remarks="blog comment status" />
+            <column name="allow_notification" type="boolean" defaultValueBoolean="false" remarks="blog comment is allow notification ?" />
+            <column name="top_priority" type="INT" remarks="blog comment top priority" />
+
+            <column name="create_by" type="BIGINT" remarks="create by" />
+            <column name="create_time" type="DATETIME" remarks="crate time" defaultValueDate="${now}"/>
+            <column name="last_update_by" type="BIGINT" remarks="last update by" />
+            <column name="last_update_time" type="DATETIME" remarks="last update time" defaultValueDate="${now}" />
+            <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

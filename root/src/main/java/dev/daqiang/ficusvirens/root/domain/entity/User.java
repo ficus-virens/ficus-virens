@@ -7,14 +7,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author Vista Yih
  * @version 0.1.0
+ * <p>
+ * Created on 2021-11-09
+ * Package dev.daqiang.ficusvirens.root.domain.entity in ficus-virens
  */
 @Data
 public class User extends BaseEntity implements UserDetails, Serializable {
@@ -22,6 +22,20 @@ public class User extends BaseEntity implements UserDetails, Serializable {
     private Long id;
 
     private String username;
+
+    private String nickname;
+
+    private String email;
+
+    private String avatar;
+
+    private String description;
+
+    private Date expireTime;
+
+    private boolean isLocked;
+
+    private boolean isEnabled;
 
     private String password;
 

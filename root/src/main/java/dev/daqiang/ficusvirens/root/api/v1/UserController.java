@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- *
- * @author Vista-Yih
- * @date 2019/12/19
+ * @author Vista Yih
+ * @version 0.1.0
+ * <p>
+ * Created on 2020/11/8
+ * Package dev.daqiang.ficusvirens.root.api.v1 in ficus-virens
  */
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")

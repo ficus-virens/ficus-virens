@@ -1,9 +1,11 @@
-package dev.daqiang.ficusvirens.root.common.constant;
+package dev.daqiang.ficusvirens.root.infra.common.constant;
 
 /**
- *
  * @author Vista-Yih
- * @date 2019/12/19
+ * @version 0.1.0
+ * <p>
+ * Created on 2019/12/19
+ * Package dev.daqiang.ficusvirens.root.infra.common.constant in ficus-virens
  */
 public enum DatabaseTypeEnum {
     /**

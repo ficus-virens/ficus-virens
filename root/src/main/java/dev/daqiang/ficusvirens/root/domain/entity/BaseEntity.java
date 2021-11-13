@@ -4,7 +4,10 @@ import java.util.Date;
 
 /**
  * @author Vista Yih
- * @date 2019/12/19
+ * @version 0.1.0
+ * <p>
+ * Created on 2019/12/19
+ * Package dev.daqiang.ficusvirens.root.domain.entity in ficus-virens
  */
 public abstract class BaseEntity {
     Long createBy;
@@ -14,7 +17,6 @@ public abstract class BaseEntity {
     Long lastUpdateBy;
 
     Date lastUpdateTime;
-
 
     Long objectVersionNumber;
 
@@ -42,12 +44,12 @@ public abstract class BaseEntity {
         this.lastUpdateBy = lastUpdateBy;
     }
 
-    public Date getLasetUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLasetUpdateTime(Date lasetUpdateTime) {
-        this.lastUpdateTime = lasetUpdateTime;
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 
     public Long getObjectVersionNumber() {

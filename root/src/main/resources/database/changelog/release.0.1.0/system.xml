@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <!--
+    system.xml 系统相关的表: sys_option sys_menu sys_log
+    -->
+    <changeSet id="create-table-20211113-0001" author="vista yih">
+        <createTable tableName="sys_option" remarks="system option table">
+            <column name="id" type="BIGINT" remarks="system option id" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_option_id" />
+            </column>
+            <column name="type" type="INT(3)" remarks="system option type" >
+                <constraints nullable="false" />
+            </column>
+            <column name="key" type="VARCHAR(100)" remarks="system option key">
+                <constraints nullable="false" />
+            </column>
+            <column name="value" type="VARCHAR(1024)" remarks="system option key">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="create_by" type="BIGINT" remarks="create by" />
+            <column name="create_time" type="DATETIME" remarks="crate time" defaultValueDate="${now}"/>
+            <column name="last_update_by" type="BIGINT" remarks="last update by" />
+            <column name="last_update_time" type="DATETIME" remarks="last update time" defaultValueDate="${now}" />
+            <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
+        </createTable>
+
+        <createTable tableName="sys_log" remarks="system log table">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_link_id" />
+            </column>
+            <column name="name" type="VARCHAR(100)" remarks="system link name">
+                <constraints nullable="false" />
+            </column>
+            <column name="url" type="VARCHAR(1023)" remarks="system link url" />
+            <column name="description" type="VARCHAR(1023)" remarks="system link description">
+                <constraints nullable="false" />
+            </column>
+            <column name="logo" type="VARCHAR(1023)" remarks="system link logo" />
+            <column name="priority" type="INT" remarks="system link priority" />
+
+            <column name="create_by" type="BIGINT" remarks="create by" />
+            <column name="create_time" type="DATETIME" remarks="crate time" defaultValueDate="${now}"/>
+            <column name="last_update_by" type="BIGINT" remarks="last update by" />
+            <column name="last_update_time" type="DATETIME" remarks="last update time" defaultValueDate="${now}" />
+            <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
+        </createTable>
+
+        <createTable tableName="sys_menu" remarks="system menu table">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_menu_id" />
+            </column>
+            <column name="name" type="VARCHAR(100)" remarks="system menu name" >
+                <constraints nullable="false" />
+            </column>
+            <column name="priority" type="INT" remarks="system menu priority" />
+            <column name="target" type="VARCHAR(1023)" remarks="system menu target" />
+            <column name="icon" type="VARCHAR(1023)" remarks="system menu icon" />
+            <column name="parent_id" type="BIGINT" remarks="system menu parent id" >
+                <constraints nullable="false" />
+            </column>
+            <column name="group" type="VARCHAR(100)" remarks="system menu group" >
+                <constraints nullable="false" />
+            </column>
+
+            <column name="create_by" type="BIGINT" remarks="create by" />
+            <column name="create_time" type="DATETIME" remarks="crate time" defaultValueDate="${now}"/>
+            <column name="last_update_by" type="BIGINT" remarks="last update by" />
+            <column name="last_update_time" type="DATETIME" remarks="last update time" defaultValueDate="${now}" />
+            <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

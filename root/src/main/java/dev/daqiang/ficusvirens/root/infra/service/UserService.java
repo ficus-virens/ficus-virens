@@ -1,7 +1,6 @@
 package dev.daqiang.ficusvirens.root.infra.service;
 
 import dev.daqiang.ficusvirens.root.domain.entity.User;
-import dev.daqiang.ficusvirens.root.domain.entity.UserInfo;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface UserService {
 
     User findUserById(Long id);
 
-    UserInfo findUserInfoByUsername(String username);
+    // UserInfo findUserInfoByUsername(String username);
 
     Integer changePassword(String oldPassword, String newPassword);
 
@@ -28,7 +27,7 @@ public interface UserService {
 
     Integer deleteUserById();
 
-    Integer updateUserInfo(UserInfo userInfo);
+    //Integer updateUserInfo(UserInfo userInfo);
 
     boolean existsByUsername(String username);
 

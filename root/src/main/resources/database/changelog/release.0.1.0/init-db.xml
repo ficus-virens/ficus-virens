@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <!--
+    init-db.xml 所有表的种子数据
+    -->
+    <changeSet id="insert-data-20190803-0002" author="vista yih">
+        <insert tableName="blog_post">
+            <column name="id" autoIncrement="true" valueNumeric="1" />
+            <column name="title" value="test_post" />
+            <column name="status" value="0" />
+            <column name="editor_type" value="0" />
+            <column name="summary" value="summary" />
+            <column name="original_context" value="qwertyuiopasdfghjklzxcvbnm" />
+        </insert>
+
+        <!--
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="1" />
+            <column name="node_name" value="Food"/>
+            <column name="lft" valueNumeric="1" />
+            <column name="rgt" valueNumeric="18"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="2" />
+            <column name="node_name" value="Fruit"/>
+            <column name="lft" valueNumeric="2" />
+            <column name="rgt" valueNumeric="11"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="3" />
+            <column name="node_name" value="Red"/>
+            <column name="lft" valueNumeric="3" />
+            <column name="rgt" valueNumeric="6"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="4" />
+            <column name="node_name" value="Cherry"/>
+            <column name="lft" valueNumeric="4" />
+            <column name="rgt" valueNumeric="5"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="5" />
+            <column name="node_name" value="Yellow"/>
+            <column name="lft" valueNumeric="7" />
+            <column name="rgt" valueNumeric="10"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="6" />
+            <column name="node_name" value="Banana"/>
+            <column name="lft" valueNumeric="8" />
+            <column name="rgt" valueNumeric="9"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="7" />
+            <column name="node_name" value="Meat"/>
+            <column name="lft" valueNumeric="12" />
+            <column name="rgt" valueNumeric="17"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="8" />
+            <column name="node_name" value="Beef"/>
+            <column name="lft" valueNumeric="13" />
+            <column name="rgt" valueNumeric="14"/>
+        </insert>
+
+        <insert tableName="blog_tree_node">
+            <column name="id" valueNumeric="9" />
+            <column name="node_name" value="Pork"/>
+            <column name="lft" valueNumeric="15" />
+            <column name="rgt" valueNumeric="16"/>
+        </insert>
+        -->
+    </changeSet>
+
+    <!--
+    <changeSet id="create-table-20201109-0002" author="vista yih" >
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="client" />
+            <column name="client_secret" value="$2a$10$ISeBd.V91Aqbu.S6pRXlsOasxCatrfk8O3UT5Ph12d6g2xppT9XKK" />
+            <column name="resource_ids" value="blog_root" />
+            <column name="scope" value="profile,email,phone" />
+            <column name="authorized_grant_types" value="authorization_code,implicit,client_credentials,password,refresh_token" />
+            <column name="web_server_redirect_uri" value="http://localhost:4200" />
+            <column name="authorities" value="" />
+            <column name="access_token_validity" valueNumeric="7200" />
+            <column name="refresh_token_validity" valueNumeric="72000" />
+            <column name="additional_information" value="{}" />
+            <column name="autoapprove" value="" />
+        </insert>
+    </changeSet>
+    -->
+
+    <changeSet id="insert-data-20190728-0002" author="vista yih">
+        <insert tableName="blog_sys_user">
+            <column name="id" valueNumeric="1"/>
+            <column name="username" value="admin" />
+            <column name="nickname" value="admin" />
+            <column name="email" value="admin@test.com" />
+            <column name="password" value="$2a$10$6CIKw5iftyfW3amkZ105KOmKmzG4i9HFYDP11ROPeC8vJY5MEDRSu"/>
+        </insert>
+        <insert tableName="blog_sys_user">
+            <column name="id" valueNumeric="2"/>
+            <column name="username" value="vista yih" />
+            <column name="nickname" value="vista" />
+            <column name="email" value="vista@test.com" />
+            <column name="password" value="$2a$10$6CIKw5iftyfW3amkZ105KOmKmzG4i9HFYDP11ROPeC8vJY5MEDRSu"/>
+        </insert>
+        <insert tableName="blog_sys_user">
+            <column name="id" valueNumeric="3"/>
+            <column name="username" value="test" />
+            <column name="nickname" value="test" />
+            <column name="email" value="test@test.com" />
+            <column name="password" value="$2a$10$6CIKw5iftyfW3amkZ105KOmKmzG4i9HFYDP11ROPeC8vJY5MEDRSu"/>
+        </insert>
+        <insert tableName="blog_sys_user">
+            <column name="id" valueNumeric="4"/>
+            <column name="username" value="test2" />
+            <column name="nickname" value="test2" />
+            <column name="email" value="test2@test.com" />
+            <column name="password" value="$2a$10$6CIKw5iftyfW3amkZ105KOmKmzG4i9HFYDP11ROPeC8vJY5MEDRSu"/>
+        </insert>
+
+        <insert tableName="blog_sys_role">
+            <column name="id" valueNumeric="1" />
+            <column name="role_name" value="ROLE_ADMIN" />
+        </insert>
+        <insert tableName="blog_sys_role">
+            <column name="id" valueNumeric="2" />
+            <column name="role_name" value="ROLE_AUTHOR" />
+        </insert>
+        <insert tableName="blog_sys_role">
+            <column name="id" valueNumeric="3" />
+            <column name="role_name" value="ROLE_VISITOR" />
+        </insert>
+        <insert tableName="blog_sys_role">
+            <column name="id" valueNumeric="4" />
+            <column name="role_name" value="ROLE_TEST" />
+        </insert>
+
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="1" />
+            <column name="role_id" valueNumeric="1" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="1" />
+            <column name="role_id" valueNumeric="2" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="1" />
+            <column name="role_id" valueNumeric="3" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="2" />
+            <column name="role_id" valueNumeric="2" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="2" />
+            <column name="role_id" valueNumeric="3" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="3" />
+            <column name="role_id" valueNumeric="1" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="3" />
+            <column name="role_id" valueNumeric="2" />
+        </insert>
+        <insert tableName="blog_sys_user_role">
+            <column name="user_id" valueNumeric="3" />
+            <column name="role_id" valueNumeric="3" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

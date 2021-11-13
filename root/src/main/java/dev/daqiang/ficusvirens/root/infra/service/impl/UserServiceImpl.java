@@ -1,7 +1,6 @@
 package dev.daqiang.ficusvirens.root.infra.service.impl;
 
 import dev.daqiang.ficusvirens.root.domain.entity.User;
-import dev.daqiang.ficusvirens.root.domain.entity.UserInfo;
 import dev.daqiang.ficusvirens.root.infra.mapper.UserMapper;
 import dev.daqiang.ficusvirens.root.infra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /*
     @Override
     public UserInfo findUserInfoByUsername(String username) {
         return null;
     }
+     */
 
     @Override
     public Integer changePassword(String oldPassword, String newPassword) {
@@ -60,10 +61,12 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /*
     @Override
     public Integer updateUserInfo(UserInfo userInfo) {
         return null;
     }
+     */
 
     @Override
     public boolean existsByUsername(String username) {

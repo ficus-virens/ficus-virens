@@ -4,8 +4,12 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <include file="classpath:database/changelog/release.0.1.0/system.xml" />
     <include file="classpath:database/changelog/release.0.1.0/rbac.xml" />
     <include file="classpath:database/changelog/release.0.1.0/post.xml" />
+    <include file="classpath:database/changelog/release.0.1.0/comment.xml" />
+    <include file="classpath:database/changelog/release.0.1.0/init-db.xml" />
+    <!--
     <include file="classpath:database/changelog/release.0.1.0/oauth2.xml" />
-
+    -->
 </databaseChangeLog>

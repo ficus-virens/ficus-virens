@@ -4,6 +4,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <!--
+    oauth2.xml 认证相关的表——暂时不用
+    -->
     <changeSet id="create-table-20201109-0001" author="vista yih" >
         <createTable tableName="oauth_client_details">
             <column name="client_id" type="VARCHAR(256)">
@@ -86,19 +89,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-table-20201109-0002" author="vista yih" >
-        <insert tableName="oauth_client_details">
-            <column name="client_id" value="client" />
-            <column name="client_secret" value="$2a$10$ISeBd.V91Aqbu.S6pRXlsOasxCatrfk8O3UT5Ph12d6g2xppT9XKK" />
-            <column name="resource_ids" value="blog_root" />
-            <column name="scope" value="profile,email,phone" />
-            <column name="authorized_grant_types" value="authorization_code,implicit,client_credentials,password,refresh_token" />
-            <column name="web_server_redirect_uri" value="http://localhost:4200" />
-            <column name="authorities" value="" />
-            <column name="access_token_validity" valueNumeric="7200" />
-            <column name="refresh_token_validity" valueNumeric="72000" />
-            <column name="additional_information" value="{}" />
-            <column name="autoapprove" value="" />
-        </insert>
-    </changeSet>
 </databaseChangeLog>

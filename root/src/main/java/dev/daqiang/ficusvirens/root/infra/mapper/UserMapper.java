@@ -1,7 +1,6 @@
 package dev.daqiang.ficusvirens.root.infra.mapper;
 
 import dev.daqiang.ficusvirens.root.domain.entity.User;
-import dev.daqiang.ficusvirens.root.domain.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public interface UserMapper {
      * @param userId 用户编号
      * @return 用户详细信息
      */
-    UserInfo selectUserInfoById(Long userId);
+    // UserInfo selectUserInfoById(Long userId);
 
     /**
      * 根据用户 ID 获取用户信息，需要将 blog_sys_user_role 关联的数据删除之后执行

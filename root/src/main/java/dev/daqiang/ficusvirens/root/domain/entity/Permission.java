@@ -5,9 +5,13 @@ import lombok.Data;
 import java.util.Objects;
 
 /**
- * @author Vista-Yih
- * @date 2019/12/19
+ * @author Vista Yih
+ * @version 0.1.0
+ * <p>
+ * Created on 2019/12/19
+ * Package dev.daqiang.ficusvirens.root.domain.entity in ficus-virens
  */
+/*
 @Data
 public class Permission extends BaseEntity {
 
@@ -36,6 +40,5 @@ public class Permission extends BaseEntity {
     public int hashCode() {
         return Objects.hash(id, permissionName);
     }
-
-
 }
+*/

@@ -16,14 +16,6 @@
         </collection>
     </resultMap>
 
-    <resultMap id="userInfoResultMap" type="dev.daqiang.ficusvirens.root.domain.entity.UserInfo"
-               extends="dev.daqiang.ficusvirens.root.infra.mapper.BaseEntityMapper.baseEntityResultMap">
-        <id property="id" column="id" />
-        <result property="firstName" column="first_name" />
-        <result property="lastName" column="last_name" />
-    </resultMap>
-
-
     <sql id="userColumns">
         ${alias}.id,
         ${alias}.username,
@@ -69,18 +61,6 @@
         </include>
         FROM blog_sys_user u
         WHERE username=#{username}
-    </select>
-
-    <select id="selectUserInfoById" resultMap="userInfoResultMap">
-        SELECT
-        <include refid="userInfoColumn">
-            <property name="alias" value="ui"/>
-        </include>
-        <include refid="dev.daqiang.ficusvirens.root.infra.mapper.BaseEntityMapper.baseEntityColumns">
-            <property name="alias" value="ui"/>
-        </include>
-        FROM blog_sys_user_info ui
-        WHERE ui.id=#{userId}
     </select>
 
     <delete id="deleteById" parameterType="Long">

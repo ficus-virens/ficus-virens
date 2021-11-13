@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
- * @author Vista-Yih
- * @date 2019/12/19
+ * @author Vista Yih
+ * @version 0.1.0
+ * <p>
+ * Created on 2019/12/19
+ * Package dev.daqiang.ficusvirens.root.domain.entity in ficus-virens
  */
 @Data
 public class Role extends BaseEntity implements Serializable {
 
     private Long id;
+
 
     private String roleName;
 
