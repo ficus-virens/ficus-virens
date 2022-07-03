@@ -33,17 +33,17 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     /**
-     * 根据用户编号获取用户详细信息
-     * @param userId 用户编号
-     * @return 用户详细信息
-     */
-    // UserInfo selectUserInfoById(Long userId);
-
-    /**
-     * 根据用户 ID 获取用户信息，需要将 blog_sys_user_role 关联的数据删除之后执行
+     * 根据用户 ID 删除用户，同时删除 sys_user 和 sys_user_role 表中的数据
      * @param id 用户编号
      */
     void deleteById(Long id);
+
+    /**
+     * 删除用户的角色关联
+     * @param userId 用户编号
+     * @param roleId 角色编号
+     */
+    void deleteRole(Long userId, Long roleId);
 
     /**
      * 插入用户
@@ -63,17 +63,4 @@ public interface UserMapper {
      * @param roleId 角色编号
      */
     void addRole(Long userId, Long roleId);
-
-    /**
-     * 删除用户的所有关联角色
-     * @param userId 用户编号
-     */
-    void deleteRoles(Long userId);
-
-    /**
-     * 删除用户的角色关联
-     * @param userId 用户编号
-     * @param roleId 角色编号
-     */
-    void deleteRole(Long userId, Long roleId);
 }

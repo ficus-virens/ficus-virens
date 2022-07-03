@@ -1,6 +1,5 @@
 package dev.daqiang.ficusvirens.root.infra.mapper;
 
-import dev.daqiang.ficusvirens.root.domain.entity.Role;
 import dev.daqiang.ficusvirens.root.domain.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -31,46 +31,77 @@ public class UserMapperTest {
     @Test
     public void selectTest() {
         List<User> users =  mapper.selectAll();
-        User user = mapper.selectById(1L);
         assertEquals(4, users.size());
+        assertEquals(3, users.get(0).getRoles().size());
+
+        User user = mapper.selectById(1L);
         assertEquals("admin", user.getUsername());
         assertEquals(user.getRoles().size(), 3);
-        for (Role r : user.getRoles()) {
-            if (r.getRoleName().equals("administrator")) {
-                //assertEquals(r.getPermissions().size(), 3);
-            }
-        }
     }
 
     @Test
     public void selectByUsernameTest() {
         User user = mapper.selectByUsername("admin");
-        System.out.println(user);
+        assertEquals("admin", user.getUsername());
+        assertEquals(3, user.getRoles().size());
     }
 
     @Test
     @Transactional
     public void deleteTest() {
-        mapper.deleteById(4L);
-        assertNull(mapper.selectById(4L));
+        mapper.deleteById(3L);
+        assertNull(mapper.selectById(3L));
+
+        mapper.deleteRole(2L, 3L);
+        User user = mapper.selectById(2L);
+        assertEquals(1, user.getRoles().size());
     }
 
     @Test
     @Transactional
     public void insertTest() {
         User user = new User("insert", "password");
+        user.setAvatar("https://www.baidu.com");
+        user.setDescription("haha");
+        user.setNickname("千秋");
+        user.setEmail("test@test.com");
+        user.setExpireTime(new Date(System.currentTimeMillis()));
+        user.setEnabled(true);
+        user.setLocked(true);
         mapper.insert(user);
-        assertNotNull(mapper.selectByUsername("insert"));
+
+        User user1 = mapper.selectByUsername("insert");
+        assertNotNull(user1);
+        assertEquals("test@test.com", user1.getEmail());
     }
 
     @Test
     @Transactional
     public void updateTest() {
         User user = mapper.selectById(3L);
-        System.out.println(user);
         user.setUsername("Vista");
+        user.setAvatar("https://www.baidu.com");
+        user.setDescription("haha");
+        user.setNickname("千秋");
+        user.setEmail("test@test.com");
+        user.setExpireTime(new Date(System.currentTimeMillis()));
+        user.setEnabled(true);
+        user.setLocked(true);
+
         mapper.update(user);
-        assertEquals("Vista", mapper.selectById(3L).getUsername());
+        User user1 = mapper.selectById(3L);
+        assertEquals("Vista", user1);
     }
 
+    @Test
+    @Transactional
+    public void userRoleTest() {
+        mapper.deleteRole(3L, 3L);
+        User user = mapper.selectById(3L);
+        assertEquals(2, user.getRoles().size());
+
+        mapper.addRole(3L, 3L);
+        User user1 = mapper.selectById(3L);
+        assertEquals(3, user1.getRoles().size());
+    }
 }

@@ -3,10 +3,11 @@ spring:
     active: dev
 
 mybatis:
-  check-config-location: false
+  #check-config-location: false
   type-aliases-package: dev.daqiang.ficusvirens.root.domain.entity
   configuration:
     database-id: mysql
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   mapper-locations: classpath:mapper/*.xml
 
 bezkoder:

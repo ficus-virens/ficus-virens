@@ -1,9 +1,9 @@
 package dev.daqiang.ficusvirens.root.domain.entity;
 
+import dev.daqiang.ficusvirens.root.domain.enums.RoleEnum;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,11 +19,11 @@ public class Role extends BaseEntity implements Serializable {
     private Long id;
 
 
-    private String roleName;
+    private RoleEnum roleName;
 
     //private List<Permission> permissions;
 
-    public Role(String roleName) {
+    public Role(RoleEnum roleName) {
         this.roleName = roleName;
     }
 
@@ -43,10 +43,5 @@ public class Role extends BaseEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, roleName);
-    }
-
-    @Override
-    public String toString() {
-        return this.roleName;
     }
 }

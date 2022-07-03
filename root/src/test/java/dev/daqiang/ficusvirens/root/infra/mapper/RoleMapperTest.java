@@ -1,17 +1,17 @@
 package dev.daqiang.ficusvirens.root.infra.mapper;
 
 import dev.daqiang.ficusvirens.root.domain.entity.Role;
+import dev.daqiang.ficusvirens.root.domain.enums.RoleEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Vista Yih
@@ -33,36 +33,14 @@ public class RoleMapperTest {
         List<Role> roles = mapper.selectAll();
         assertEquals(roles.size(), 4);
 
+
         Role role = mapper.selectById(1L);
-        assertEquals(role.getRoleName(), "administrator");
-        //assertEquals(role.getPermissions().size(), 3);
+        assertEquals(role.getRoleName(), RoleEnum.ADMIN);
 
-        assertNotNull(mapper.selectByName("administrator"));
+        List<Role> roles1 = mapper.selectByUserId(1L);
+        assertEquals(roles1.size(), 3);
+
+        List<Role> roles2 = mapper.selectByUsername("admin");
+        assertEquals(roles2.size(), 3);
     }
-
-    @Test
-    @Transactional
-    public void insertTest() {
-        Role role = new Role("test1");
-        mapper.insert(role);
-        assertNotNull(mapper.selectByName("test1"));
-    }
-
-    @Test
-    @Transactional
-    public void deleteTest() {
-        mapper.deleteById(4L);
-        assertNull(mapper.selectById(4L));
-    }
-
-    @Test
-    @Transactional
-    public void updateTest() {
-        Role role = mapper.selectById(1L);
-        role.setRoleName("admin");
-        mapper.update(role);
-        assertEquals(mapper.selectById(1L).getRoleName(), "admin");
-
-    }
-
 }

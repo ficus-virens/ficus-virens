@@ -12,9 +12,9 @@
     rbac.xml 网站权限相关的表: sys_user sys_role sys_user_role
     -->
     <changeSet id="crate-table-20190727-0001" author="vista yih" >
-        <createTable tableName="blog_sys_user" remarks="user table">
+        <createTable tableName="sys_user" remarks="user table">
             <column name="id" type="BIGINT" remarks="user ID,primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_blog_sys_user_id"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_user_id"/>
             </column>
             <column name="username" type="VARCHAR(100)" remarks="user name">
                 <constraints nullable="false" />
@@ -29,6 +29,8 @@
                 <constraints nullable="false"/>
             </column>
             <column name="avatar" type="VARCHAR(100)" remarks="avatar"/>
+
+            <column name="description" type="VARCHAR(1024)" remarks="avatar"/>
             <column name="expire_time" type="DATETIME" remarks="expire time" />
             <column name="is_locked" type="BOOLEAN" remarks="is locked" defaultValueBoolean="false" />
             <column name="is_enabled" type="BOOLEAN" remarks="is enabled" defaultValueBoolean="true" />
@@ -40,9 +42,9 @@
             <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
         </createTable>
 
-        <createTable tableName="blog_sys_role" remarks="role table">
+        <createTable tableName="sys_role" remarks="role table">
             <column name="id" type="BIGINT" remarks="role id, primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_blog_sys_role_id"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_role_id"/>
             </column>
             <column name="role_name" type="VARCHAR(128)" remarks="role name">
                 <constraints nullable="false" />
@@ -59,9 +61,9 @@
         只用到了 user 和 role 两极权限，permission 不使用
         -->
         <!--
-        <createTable tableName="blog_sys_permission" remarks="permission table">
+        <createTable tableName="sys_permission" remarks="permission table">
             <column name="id" type="BIGINT" remarks="permission id, primary key" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_blog_sys_permission_id" />
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_permission_id" />
             </column>
             <column name="permission_name" type="VARCHAR(128)" remarks="permission_name">
                 <constraints nullable="false" />
@@ -74,15 +76,15 @@
             <column name="object_version_number" type="BIGINT" remarks="object version number" defaultValueNumeric="1" />
         </createTable>
 
-        <createTable tableName="blog_sys_role_permission" remarks="role permission association table">
+        <createTable tableName="sys_role_permission" remarks="role permission association table">
             <column name="id" type="BIGINT" remarks="table id" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_blog_sys_role_permission_id" />
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_role_permission_id" />
             </column>
             <column name="role_id" type="BIGINT" remarks="role id">
-                <constraints nullable="false" foreignKeyName="fk_role_permission_to_role" references="blog_sys_role(id)" />
+                <constraints nullable="false" foreignKeyName="fk_role_permission_to_role" references="sys_role(id)" />
             </column>
             <column name="permission_id" type="BIGINT" remarks="permission id">
-                <constraints nullable="false" foreignKeyName="fk_role_permission_to_permission" references="blog_sys_permission(id)" />
+                <constraints nullable="false" foreignKeyName="fk_role_permission_to_permission" references="sys_permission(id)" />
             </column>
 
             <column name="create_by" type="BIGINT" remarks="create by" />
@@ -93,15 +95,15 @@
         </createTable>
         -->
 
-        <createTable tableName="blog_sys_user_role" remarks="User role association table">
+        <createTable tableName="sys_user_role" remarks="User role association table">
             <column name="id" type="BIGINT" remarks="table id" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_blog_sys_user_role_id" />
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sys_user_role_id" />
             </column>
             <column name="user_id" type="BIGINT" remarks="user id">
-                <constraints nullable="false" foreignKeyName="fk_user_role_to_user" references="blog_sys_user(id)" />
+                <constraints nullable="false" foreignKeyName="fk_user_role_to_user" deleteCascade="true" references="sys_user(id)" />
             </column>
             <column name="role_id" type="BIGINT" remarks="role id">
-                <constraints nullable="false" foreignKeyName="fk_user_role_to_role" references="blog_sys_role(id)" />
+                <constraints nullable="false" foreignKeyName="fk_user_role_to_role" deleteCascade="true" references="sys_role(id)" />
             </column>
 
             <column name="create_by" type="BIGINT" remarks="create by" />

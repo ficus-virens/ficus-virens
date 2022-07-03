@@ -7,6 +7,13 @@
         <id property="id" column="id" />
         <result property="username" column="username" />
         <result property="password" column="password" />
+        <result property="nickname" column="nickname" />
+        <result property="avatar" column="avatar" />
+        <result property="description" column="description" />
+        <result property="email" column="email" />
+        <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP" />
+        <result property="isLocked" column="is_locked" />
+        <result property="isEnabled" column="is_enabled" />
 
     </resultMap>
 
@@ -20,15 +27,16 @@
         ${alias}.id,
         ${alias}.username,
         ${alias}.password,
+        ${alias}.nickname,
+        ${alias}.avatar,
+        ${alias}.description,
+        ${alias}.email,
+        ${alias}.expire_time,
+        ${alias}.is_locked,
+        ${alias}.is_enabled,
     </sql>
 
-    <sql id="userInfoColumn">
-        ${alias}.id,
-        ${alias}.first_name,
-        ${alias}.last_name,
-    </sql>
-
-    <select id="selectAll" resultMap="userBaseResultMap">
+    <select id="selectAll" resultMap="userResultMap">
         SELECT
         <include refid="userColumns" >
             <property name="alias" value="u"/>
@@ -36,7 +44,7 @@
         <include refid="dev.daqiang.ficusvirens.root.infra.mapper.BaseEntityMapper.baseEntityColumns" >
             <property name="alias" value="u"/>
         </include>
-        FROM blog_sys_user u
+        FROM sys_user u
     </select>
 
     <select id="selectById" resultMap="userResultMap">
@@ -47,8 +55,8 @@
         <include refid="dev.daqiang.ficusvirens.root.infra.mapper.BaseEntityMapper.baseEntityColumns" >
             <property name="alias" value="u"/>
         </include>
-        FROM blog_sys_user u
-        WHERE id=#{id}
+        FROM sys_user u
+        WHERE u.id=#{id}
     </select>
 
     <select id="selectByUsername" resultMap="userResultMap">
@@ -59,22 +67,24 @@
         <include refid="dev.daqiang.ficusvirens.root.infra.mapper.BaseEntityMapper.baseEntityColumns" >
             <property name="alias" value="u"/>
         </include>
-        FROM blog_sys_user u
+        FROM sys_user u
         WHERE username=#{username}
     </select>
 
     <delete id="deleteById" parameterType="Long">
-        DELETE FROM blog_sys_user WHERE id=#{id}
+        DELETE FROM sys_user WHERE id=#{id}
     </delete>
+
     <delete id="deleteRoles">
-        DELETE FROM blog_sys_user_role WHERE user_id = #{userId}
+        DELETE FROM sys_user_role WHERE user_id = #{userId}
     </delete>
+
     <delete id="deleteRole">
-        DELETE FROM blog_sys_user_role WHERE user_id = #{userId} and role_id=#{roleId}
+        DELETE FROM sys_user_role WHERE user_id = #{userId} and role_id=#{roleId}
     </delete>
 
     <insert id="insert" parameterType="dev.daqiang.ficusvirens.root.domain.entity.User">
-        INSERT INTO blog_sys_user
+        INSERT INTO sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="username != null and username != ''">
                 username,
@@ -82,16 +92,34 @@
             <if test="password != null and password != ''">
                 password,
             </if>
-            <if test="createBy != null and createBy !=''">
-                create_by,
+            <if test="nickname != null and nickname != ''">
+                nickname,
             </if>
-            <if test="createTime != null and createTime !=''">
+            <if test="email != null and email !=''">
+                email,
+            </if>
+            <if test="avatar != null and avatar !=''">
+                avatar,
+            </if>
+            <if test="description != null and description !=''">
+                description,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+            <if test="isLocked != null and isLocked !=''">
+                is_locked,
+            </if>
+            <if test="isEnabled != null and isEnabled !=''">
+                is_enabled,
+            </if>
+            <if test="createTime != null">
                 create_time,
             </if>
             <if test="lastUpdateBy != null and lastUpdateBy !=''">
                 last_update_by,
             </if>
-            <if test="lastUpdateTime != null and lastUpdateTime !=''">
+            <if test="lastUpdateTime != null">
                 last_update_time,
             </if>
             <if test="objectVersionNumber != null and objectVersionNumber !=''">
@@ -106,16 +134,37 @@
             <if test="password != null and password != ''">
                 #{password},
             </if>
+            <if test="nickname != null and nickname != ''">
+                #{nickname},
+            </if>
+            <if test="email != null and email !=''">
+                #{email},
+            </if>
+            <if test="avatar != null and avatar !=''">
+                #{avatar},
+            </if>
+            <if test="description != null and description !=''">
+                #{description},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isLocked != null and isLocked !=''">
+                #{isLocked},
+            </if>
+            <if test="isEnabled != null and isEnabled !=''">
+                #{isEnabled},
+            </if>
             <if test="createBy != null and createBy !=''">
                 #{createBy},
             </if>
-            <if test="createTime != null and createTime !=''">
+            <if test="createTime != null">
                 #{createTime},
             </if>
             <if test="lastUpdateBy != null and lastUpdateBy !=''">
                 #{lastUpdateBy},
             </if>
-            <if test="lastUpdateTime != null and lastUpdateTime !=''">
+            <if test="lastUpdateTime != null">
                 #{lastUpdateTime},
             </if>
             <if test="objectVersionNumber != null and objectVersionNumber !=''">
@@ -123,30 +172,33 @@
             </if>
         </trim>
     </insert>
+
     <insert id="addRole">
-        INSERT INTO blog_sys_user_role
+        INSERT INTO sys_user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null and userId != ''">
-                userId,
+                user_id,
             </if>
             <if test="roleId != null and roleId != ''">
                 role_id,
             </if>
+            <!--
             <if test="createBy != null and createBy !=''">
                 create_by,
             </if>
-            <if test="createTime != null and createTime !=''">
+            <if test="createTime != null">
                 create_time,
             </if>
             <if test="lastUpdateBy != null and lastUpdateBy !=''">
                 last_update_by,
             </if>
-            <if test="lastUpdateTime != null and lastUpdateTime !=''">
+            <if test="lastUpdateTime != null">
                 last_update_time,
             </if>
             <if test="objectVersionNumber != null and objectVersionNumber !=''">
                 object_version_number
             </if>
+            -->
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -156,29 +208,39 @@
             <if test="roleId != null and roleId != ''">
                 #{roleId},
             </if>
+            <!--
             <if test="createBy != null and createBy !=''">
                 #{createBy},
             </if>
-            <if test="createTime != null and createTime !=''">
+            <if test="createTime != null">
                 #{createTime},
             </if>
             <if test="lastUpdateBy != null and lastUpdateBy !=''">
                 #{lastUpdateBy},
             </if>
-            <if test="lastUpdateTime != null and lastUpdateTime !=''">
+            <if test="lastUpdateTime != null">
                 #{lastUpdateTime},
             </if>
             <if test="objectVersionNumber != null and objectVersionNumber !=''">
                 #{objectVersionNumber}
             </if>
+            -->
         </trim>
     </insert>
 
     <update id="update" parameterType="dev.daqiang.ficusvirens.root.domain.entity.User">
-        UPDATE blog_sys_user
+        UPDATE sys_user
         <set>
             <if test="username != null">username=#{username},</if>
             <if test="password != null">password=#{password},</if>
+            <if test="nickname != null">nickname=#{nickname},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="avatar != null">avatar=#{avatar},</if>
+            <if test="description != null">description=#{description},</if>
+            <if test="expireTime != null">expire_time=#{expireTime},</if>
+            <if test="isLocked != null">is_locked=#{isLocked},</if>
+            <if test="isEnabled != null">is_enabled=#{isEnabled},</if>
+
             <if test="lastUpdateBy != null">last_update_by=#{lastUpdateBy},</if>
             <if test="lastUpdateTime != null">last_update_time=#{lastUpdateTime},</if>
             <if test="objectVersionNumber != null">object_version_number=#{objectVersionNumber}</if>
